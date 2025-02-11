@@ -118,5 +118,4 @@ function DogList({ selectedBreed, addToFavorites }) {
 	)
 }
 
-
 export default DogList;
