@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button } from "@material-tailwind/react";
 import DogList from './DogList';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function SearchPage({ addToFavorites }) {
 	const [breeds, setBreeds] = useState([]);
-	const [isBreedVisible, setIsBreedVisible] = useState(false);
 	const [selectedBreed, setSelectedBreed] = useState('');
 
 	useEffect(() => {
@@ -35,12 +36,8 @@ function SearchPage({ addToFavorites }) {
 		<header className="bg-pink shadow-sm">
 		<div className="text-center">
 			<h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">Find Your Paw Friend</h1>
-			<div className="flex w-max items-end gap-4">
-				<Button variant="outlined" onClick={() => setIsBreedVisible(!isBreedVisible)}>{isBreedVisible ? "Hide Breeds" : "Click to see dog breeds"}</Button>
-			</div>
-
-			{isBreedVisible && (
-        <select
+			<FormControl>
+				<select
           className="mt-4 border p-2 rounded"
           onChange={(e) => setSelectedBreed(e.target.value)}
           value={selectedBreed}
@@ -52,7 +49,21 @@ function SearchPage({ addToFavorites }) {
             </option>
           ))}
         </select>
-      )}
+
+				{/* <Select
+          className="mt-4 border p-2 rounded"
+					label="Age"
+          onChange={(e) => setSelectedBreed(e.target.value)}
+          value={selectedBreed}
+        >
+          <option value="">All Breeds</option>
+          {breeds.map((breed) => (
+            <option key={breed} value={breed}>
+              {breed}
+            </option>
+          ))}
+        </Select> */}
+			</FormControl>			
 			<DogList selectedBreed={selectedBreed} addToFavorites={addToFavorites} />
 			{/* <FilterBar /> */}
 		</div>

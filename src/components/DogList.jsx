@@ -8,7 +8,7 @@ function DogList({ selectedBreed, addToFavorites }) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalDogs, setTotalDogs] = useState(0);
-  const pageSize = 10;
+  const pageSize = 60;
 
 	useEffect(() => {
 		async function fetchDogIds() {
@@ -88,7 +88,7 @@ function DogList({ selectedBreed, addToFavorites }) {
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>
             <p>Location: {dog.zip_code}</p>
-            <Button variant="contained" onClick={() => addToFavorites(dog)}>
+            <Button variant="contained" color="blue" onClick={() => addToFavorites(dog)}>
               ❤️ Add to Favorites
             </Button>
           </div>

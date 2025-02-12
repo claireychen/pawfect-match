@@ -47,7 +47,7 @@ function ResponsiveAppBar({ favorites, setFavorites  }) {
 
   return (
     <>
-			<AppBar position="static">
+			<AppBar position="fixed" sx={{ top: 0, zIndex: 1100, width: '100%' }}>
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
 						<Typography
@@ -56,7 +56,7 @@ function ResponsiveAppBar({ favorites, setFavorites  }) {
 							component="a"
 							href="#app-bar-with-responsive-menu"
 							sx={{
-								mr: 2,
+								mr: 110,
 								display: { xs: 'none', md: 'flex' },
 								fontFamily: 'monospace',
 								fontWeight: 700,
