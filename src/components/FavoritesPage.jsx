@@ -1,9 +1,26 @@
 import PropTypes from "prop-types";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
-function FavoritesPage({ favorites, removeFromFavorites }) {
+function FavoritesPage({ favorites, setFavorites, removeFromFavorites }) {
   const navigate = useNavigate();
+
+	// const [favorites, setFavorites] = useState([]);
+
+  // useEffect(() => {
+  //   const savedFavorites = localStorage.getItem("favorites");
+  //   if (savedFavorites) {
+  //     setFavorites(JSON.parse(savedFavorites));
+  //   }
+  // }, []);
+
+  const handleRemove = (dogId) => {
+    removeFromFavorites(dogId);
+    const updatedFavorites = favorites.filter(dog => dog.id !== dogId);
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
 
   return (
 		<header className="bg-pink shadow-sm">
@@ -25,7 +42,7 @@ function FavoritesPage({ favorites, removeFromFavorites }) {
 								<p>Age: {dog.age}</p>
 								<p>Location: {dog.zip_code}</p>
 
-								<Button variant="destructive" onClick={() => removeFromFavorites(dog.id)}>
+								<Button variant="destructive" onClick={() => handleRemove(dog.id)}>
 									❌ Remove
 								</Button>
 							</div>
@@ -46,6 +63,7 @@ function FavoritesPage({ favorites, removeFromFavorites }) {
 
 FavoritesPage.propTypes = {
   favorites: PropTypes.array.isRequired,
+	setFavorites: PropTypes.func.isRequired,
   removeFromFavorites: PropTypes.func.isRequired,
 };
 

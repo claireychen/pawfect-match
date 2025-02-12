@@ -16,7 +16,16 @@ import SearchPage from './SearchPage';
 
 const settings = ['Profile', 'Logout'];
 
-function ResponsiveAppBar({ favorites, addToFavorites }) {
+function ResponsiveAppBar({ favorites, setFavorites  }) {
+
+	const addToFavorites = (dog) => {
+    setFavorites((prevFavorites) => {
+      if (!prevFavorites.some(fav => fav.id === dog.id)) {
+        return [...prevFavorites, dog];
+      }
+      return prevFavorites;
+    });
+  };
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
@@ -97,14 +106,14 @@ function ResponsiveAppBar({ favorites, addToFavorites }) {
 					</Toolbar>
 				</Container>
 			</AppBar>
-
-			<SearchPage addToFavorites={addToFavorites} />
+			<SearchPage	addToFavorites={addToFavorites} />
 		</>
   );
 }
 
 ResponsiveAppBar.propTypes = {
 	favorites: PropTypes.array.isRequired,
+	setFavorites: PropTypes.func.isRequired,
 	addToFavorites: PropTypes.func.isRequired,
 };
 

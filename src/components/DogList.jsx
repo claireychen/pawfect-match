@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button } from "@material-tailwind/react";
 
@@ -117,5 +118,10 @@ function DogList({ selectedBreed, addToFavorites }) {
 		</div>
 	)
 }
+
+DogList.propTypes = {
+	selectedBreed: PropTypes.array.isRequired,
+	addToFavorites: PropTypes.func.isRequired,
+};
 
 export default DogList;

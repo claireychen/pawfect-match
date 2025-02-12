@@ -1,14 +1,20 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignupPage from './components/SignupPage';
-import SearchPage from './components/SearchPage';
 import FavoritesPage from './components/FavoritesPage';
 import MatchPage from './components/MatchPage';
 import ResponsiveAppBar from './components/AppBar';
 
 function App() {
-	// const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [favorites, setFavorites] = useState([]);
+
+	const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem("favorites");
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   const addToFavorites = (dog) => {
     setFavorites((prevFavorites) => {
@@ -19,9 +25,9 @@ function App() {
     });
   };
 
-	function removeFromFavorites(dogId) {
-    setFavorites(favorites.filter((dog) => dog.id !== dogId));
-  }
+	const removeFromFavorites = (dogId) => {
+    setFavorites((prevFavorites) => prevFavorites.filter((dog) => dog.id !== dogId));
+  };
 
   return (
     <Router>
@@ -31,11 +37,9 @@ function App() {
 					{/* <Route path="/search" element={isAuthenticated ? <SearchPage /> : <Navigate to="/" />} /> */}
 
 					<Route path="/" element={<SignupPage />} />
-					<Route path="/search" element={<ResponsiveAppBar favorites={favorites} addToFavorites={addToFavorites} />} />
-					<Route path="/favorites" element={<FavoritesPage favorites={favorites} removeFromFavorites={removeFromFavorites} />} />
+					<Route path="/search" element={<ResponsiveAppBar favorites={favorites} setFavorites={setFavorites} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} />} />
+					<Route path="/favorites" element={<FavoritesPage favorites={favorites} setFavorites={setFavorites} removeFromFavorites={removeFromFavorites} />} />
 
-					{/* <Route path="/search" element={<SearchPage />} /> */}
-					{/* <Route path="/favorites" element={<FavoritesPage />} /> */}
 					{/* <Route path="/match" element={<MatchPage />} /> */}
 				</Routes>
 			</div>
