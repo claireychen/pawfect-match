@@ -1,19 +1,10 @@
 import PropTypes from "prop-types";
 import { Button } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import MatchPage from "./MatchPage";
 
 function FavoritesPage({ favorites, setFavorites, removeFromFavorites }) {
-  const navigate = useNavigate();
-
-	// const [favorites, setFavorites] = useState([]);
-
-  // useEffect(() => {
-  //   const savedFavorites = localStorage.getItem("favorites");
-  //   if (savedFavorites) {
-  //     setFavorites(JSON.parse(savedFavorites));
-  //   }
-  // }, []);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRemove = (dogId) => {
     removeFromFavorites(dogId);
@@ -47,10 +38,15 @@ function FavoritesPage({ favorites, setFavorites, removeFromFavorites }) {
 								</Button>
 							</div>
 						))}
+						<MatchPage
+							favoriteDogs={favorites} 
+							open={isModalOpen} 
+							onClose={() => setIsModalOpen(false)} 
+						/>
 						<Button
 							variant="default"
 							className="mt-4 w-full"
-							onClick={() => navigate("/match", { state: { favoriteDogs: favorites }})}
+							onClick={() => setIsModalOpen(true)}
 						>
 							🐶 Find My Match
 						</Button>

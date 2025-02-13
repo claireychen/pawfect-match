@@ -40,7 +40,7 @@ function App() {
 					<Route path="/search" element={<ResponsiveAppBar favorites={favorites} setFavorites={setFavorites} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} />} />
 					<Route path="/favorites" element={<FavoritesPage favorites={favorites} setFavorites={setFavorites} removeFromFavorites={removeFromFavorites} />} />
 
-					{/* <Route path="/match" element={<MatchPage />} /> */}
+					<Route path="/match" element={<MatchPage />} />
 				</Routes>
 			</div>
 			
