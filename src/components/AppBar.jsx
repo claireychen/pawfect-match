@@ -44,6 +44,22 @@ function ResponsiveAppBar({ favorites, setFavorites  }) {
     setAnchorElUser(null);
   };
 
+	const handleLogout = async () => {
+    try {
+      const response = await fetch('https://frontend-take-home-service.fetch.com/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        navigate('/');  // Redirect to login or home page
+      } else {
+        console.error('Failed to logout');
+      }
+    } catch (error) {
+      console.error('Error in handleLogout:', error);
+    }
+  };
 
   return (
     <>
@@ -97,7 +113,7 @@ function ResponsiveAppBar({ favorites, setFavorites  }) {
 								onClose={handleCloseUserMenu}
 							>
 								{settings.map((setting) => (
-									<MenuItem key={setting} onClick={handleCloseUserMenu}>
+									<MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
 										<Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
 									</MenuItem>
 								))}
