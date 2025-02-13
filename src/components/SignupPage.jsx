@@ -31,13 +31,13 @@ function SignupPage() {
 	return (
 		<div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-				<h1 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Welcome to Pawfect Match</h1>
+				<h1 className="mt-13 text-center text-3xl/15 font-bold tracking-tight text-gray-800"> Welcome to Pawfect Match</h1>
 			</div>
 
 			<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 				<form className="space-y-6" onSubmit={handleSubmit} action="#" method="POST">
 					<div>
-						<label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">Name</label>
+						<label htmlFor="name" className="block text-sm/8 font-medium text-gray-900">Name</label>
 						<div className="mt-2">
 							<input 
 								type="name" name="name" id="name" autoComplete="name" required value={signupName} onChange={(e) => setSignupName(e.target.value)}
