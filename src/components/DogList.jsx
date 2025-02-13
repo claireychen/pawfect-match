@@ -74,7 +74,7 @@ function DogList({ selectedBreed, addToFavorites }) {
 	return (
 		<div>
 			<div className="flex justify-between items-center">
-        <h2>Available Dogs</h2>
+        {/* <h2 className="text-5xl font-semibold tracking-tight text-balance text-gray-200 sm:text-7sm">Available Dogs</h2> */}
         <Button variant="outlined" onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
           Sort by Breed ({sortOrder === "asc" ? "A-Z" : "Z-A"})
         </Button>
@@ -83,7 +83,7 @@ function DogList({ selectedBreed, addToFavorites }) {
 			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {dogs.map((dog) => (
           <div key={dog.id} className="border rounded-lg p-4 shadow-md">
-            <img src={dog.img} alt={dog.name} className="w-full h-48 object-cover rounded-md" />
+            <img src={dog.img} alt={dog.name} className="w-full h-72 object-cover rounded-md" />
             <h3 className="text-lg font-bold mt-2">{dog.name}</h3>
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>

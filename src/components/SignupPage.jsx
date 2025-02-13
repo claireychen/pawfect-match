@@ -4,9 +4,7 @@ function SignupPage() {
 	const [signupName, setSignupName] = useState('');
 	const [signupEmail, setSignupEmail] = useState('');
 
-
 	async function signupResult(signupData) {
-		console.log("**********")
 		try {
 			const loginResponse = await fetch(`https://frontend-take-home-service.fetch.com/auth/login`, {  // ?name=${name}&email=${email}
 				method: "POST",
@@ -16,8 +14,6 @@ function SignupPage() {
 			})
 
 			window.location.href = "/search";
-
-			console.log("loginResponse: ", loginResponse)
 
 			if (!loginResponse.ok) {
 				throw new Error('Failed to sign up')
@@ -63,11 +59,6 @@ function SignupPage() {
 						<button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
 					</div>
 				</form>
-
-				<p className="mt-10 text-center text-sm/6 text-gray-500">
-					Not a member?
-					<a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
-				</p>
 			</div>
 		</div>
 	)

@@ -54,8 +54,8 @@ function MatchPage({ favoriteDogs, open, onClose }) {
 
   return (
 		<Modal open={open} onClose={onClose}>
-      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 2, maxWidth: 400 }}>
-        <h2 className="text-3xl font-bold text-center">My Best Match</h2>
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 6, maxWidth: 400 }}>
+        <h2 className="text-3xl font-bold text-center">Your Best Match</h2>
         {match ? (
           <div className="text-center">
             <img src={match.img} alt={match.name} className="w-full h-48 object-cover rounded-md mt-4" />

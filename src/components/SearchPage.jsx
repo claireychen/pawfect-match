@@ -27,7 +27,6 @@ function SearchPage({ addToFavorites }) {
 				}
 
 				const data = await response.json();
-				// console.log("**** data: ", data)
 				setBreeds(data);
 			} catch (error) {
 				console.error("Error in fetching dogs: ", error)
@@ -40,7 +39,7 @@ function SearchPage({ addToFavorites }) {
 	return (
 		<header className="bg-pink shadow-sm">
 		<div className="text-center">
-			<h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">Find Your Paw Friend</h1>
+			<h1 className="text-5xl font-semibold tracking-tight text-balance text-white-900 sm:text-7xl">Find Your Paw Friend</h1>
 			<FormControl>
 				<select
           className="mt-4 border p-2 rounded"
@@ -64,23 +63,8 @@ function SearchPage({ addToFavorites }) {
 					<TextField id="filled-basic" label="ZIP Code" variant="outlined" />
 					<Button variant="contained">Search</Button>
 				</Box>
-
-				{/* <Select
-          className="mt-4 border p-2 rounded"
-					label="Age"
-          onChange={(e) => setSelectedBreed(e.target.value)}
-          value={selectedBreed}
-        >
-          <option value="">All Breeds</option>
-          {breeds.map((breed) => (
-            <option key={breed} value={breed}>
-              {breed}
-            </option>
-          ))}
-        </Select> */}
 			</FormControl>			
 			<DogList selectedBreed={selectedBreed} addToFavorites={addToFavorites} />
-			{/* <FilterBar /> */}
 		</div>
 		</header>
 	)
