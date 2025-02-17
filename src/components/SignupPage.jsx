@@ -31,6 +31,7 @@ function SignupPage() {
 	return (
 		<div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-sm">
+				<h2 className="mt-40 text-center text-5xl/15 font-bold tracking-tight">🐾</h2>
 				<h1 className="mt-13 text-center text-3xl/15 font-bold tracking-tight text-gray-800"> Welcome to Pawfect Match</h1>
 			</div>
 
@@ -56,7 +57,7 @@ function SignupPage() {
 					</div>
 
 					<div>
-						<button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
+						<button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign In</button>
 					</div>
 				</form>
 			</div>

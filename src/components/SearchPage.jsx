@@ -1,18 +1,15 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-// import { Button } from "@material-tailwind/react";
 import DogList from './DogList';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Box, Button, FormControl, TextField } from '@mui/material';
 
 function SearchPage({ addToFavorites }) {
 	const [breeds, setBreeds] = useState([]);
 	const [selectedBreed, setSelectedBreed] = useState('');
-	const [age, setAge] = useState('');
-	const [location, setLocation] = useState('');
+	const [ageMin, setAgeMin] = useState('');
+	const [ageMax, setAgeMax] = useState('');
+	const [zipCode, setZipCode] = useState('');
+	const [dogIds, setDogIds] = useState([]);
 
 	useEffect(() => {
 		async function fetchBreeds() {
@@ -36,10 +33,53 @@ function SearchPage({ addToFavorites }) {
 		fetchBreeds();
 	}, []);
 
+	const handleSearch = async () => {
+
+		try {
+			const queryParams = new URLSearchParams();
+
+			if (selectedBreed) {
+				queryParams.append('breeds', selectedBreed);
+			}
+
+			if (ageMin) {
+				queryParams.append('ageMin', ageMin);
+			}
+
+			if (ageMax) {
+				queryParams.append('ageMax', ageMax);
+			}
+
+			if (zipCode) {
+				queryParams.append('zipCodes', zipCode);
+			}
+
+			const queryString = queryParams.toString();
+			const url = `https://frontend-take-home-service.fetch.com/dogs/search?${queryString}`;
+
+			const response = await fetch(url, {
+				method: "GET",
+				credentials: "include",
+			})
+			console.log("aaaaaa response: ", response)
+			if (!response.ok) {
+				throw new Error("Failed to fetch dog data");
+			}
+
+			const data = await response.json();
+			setDogIds(data.resultIds);
+			console.log("aaaaaa data: ", data)
+
+		} catch (error) {
+			console.error("Error in fetching dog data: ", error)
+		}
+	}
+
 	return (
 		<header className="bg-pink shadow-sm">
-		<div className="text-center">
-			<h1 className="text-5xl font-semibold tracking-tight text-balance text-white-900 sm:text-7xl">Find Your Paw Friend</h1>
+		<div className="text-center pt-20" >
+			<h1 className="text-5xl font-extrabold tracking-tight text-transparent sm:text-7xl mt-12 mb-8 bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text">Find Your Paw Friend</h1>
+			<div>
 			<FormControl>
 				<select
           className="mt-4 border p-2 rounded"
@@ -53,18 +93,31 @@ function SearchPage({ addToFavorites }) {
             </option>
           ))}
         </select>
+				{/* <Typography variant="h5"
+            component="div"
+            sx={{ flexGrow: 2, alignSelf: 'flex-start' }}>Default Search</Typography> */}
 				<Box
 					component="form"
 					sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
 					noValidate
 					autoComplete="off"
 				>
-					<TextField id="filled-basic" label="Age" variant="outlined" />
-					<TextField id="filled-basic" label="ZIP Code" variant="outlined" />
-					<Button variant="contained">Search</Button>
+					<TextField type="number" id="min-age" label="Min Age" variant="outlined" value={ageMin} onChange={(e) => setAgeMin(e.target.value)} />
+					<TextField type="number" id="max-age" label="Max Age" variant="outlined" value={ageMax} onChange={(e) => setAgeMax(e.target.value)} />
+					{/* <TextField type="text" id="zip-code" label="ZIP Code" variant="outlined" value={zipCode} onChange={(e) => setZipCode(e.target.value)} /> */}
+					<Button size="large" variant="contained" onClick={handleSearch}>Search</Button>
 				</Box>
 			</FormControl>			
-			<DogList selectedBreed={selectedBreed} addToFavorites={addToFavorites} />
+			
+			<DogList 
+				dogIds={dogIds}
+				selectedBreed={selectedBreed} 
+				ageMin={ageMin}
+        ageMax={ageMax}
+        location={location} 
+				addToFavorites={addToFavorites} 
+			/>
+			</div>
 		</div>
 		</header>
 	)

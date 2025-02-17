@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
 
-function MatchPage({ favoriteDogs, open, onClose }) {
+function MatchModal({ favoriteDogs, open, onClose }) {
 
   const [match, setMatch] = useState(null);
   const [error, setError] = useState("");
@@ -72,9 +72,9 @@ function MatchPage({ favoriteDogs, open, onClose }) {
   );
 }
 
-export default MatchPage;
+export default MatchModal;
 
-MatchPage.propTypes = {
+MatchModal.propTypes = {
 	favoriteDogs: PropTypes.func.isRequired,
 	open: PropTypes.func.isRequired,
 	onClose: PropTypes.func.isRequired,

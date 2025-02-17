@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignupPage from './components/SignupPage';
 import FavoritesPage from './components/FavoritesPage';
-import MatchPage from './components/MatchPage';
+import MatchModal from './components/MatchModal';
 import ResponsiveAppBar from './components/AppBar';
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
 					<Route path="/" element={<SignupPage />} />
 					<Route path="/search" element={<ResponsiveAppBar favorites={favorites} setFavorites={setFavorites} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} />} />
 					<Route path="/favorites" element={<FavoritesPage favorites={favorites} setFavorites={setFavorites} removeFromFavorites={removeFromFavorites} />} />
-					<Route path="/match" element={<MatchPage />} />
+					<Route path="/match" element={<MatchModal />} />
 				</Routes>
 			</div>
 			

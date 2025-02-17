@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Button } from "@material-tailwind/react";
 import { useState } from 'react';
-import MatchPage from "./MatchPage";
+import MatchModal from "./MatchModal";
 
 function FavoritesPage({ favorites, setFavorites, removeFromFavorites }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +38,7 @@ function FavoritesPage({ favorites, setFavorites, removeFromFavorites }) {
 								</Button>
 							</div>
 						))}
-						<MatchPage
+						<MatchModal
 							favoriteDogs={favorites} 
 							open={isModalOpen} 
 							onClose={() => setIsModalOpen(false)} 
