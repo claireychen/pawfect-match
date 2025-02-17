@@ -93,9 +93,6 @@ function SearchPage({ addToFavorites }) {
             </option>
           ))}
         </select>
-				{/* <Typography variant="h5"
-            component="div"
-            sx={{ flexGrow: 2, alignSelf: 'flex-start' }}>Default Search</Typography> */}
 				<Box
 					component="form"
 					sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}

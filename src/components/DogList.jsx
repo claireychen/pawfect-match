@@ -8,58 +8,8 @@ function DogList({ selectedBreed, ageMin, ageMax, location, addToFavorites }) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalDogs, setTotalDogs] = useState(0);
-	const [zipCodes, setZipCodes] = useState([]);
   const pageSize = 60;
 
-	// async function fetchLocationDetails(zip) {
-	// 	console.log("fetchLocationDetails called with ZIP:", zip);
-	
-	// 	if (!zip || typeof zip !== "string") {
-	// 		console.error("Invalid ZIP passed to fetchLocationDetails:", zip);
-	// 		return;
-	// 	}
-	
-	// 	try {
-	// 		const response = await fetch(`https://frontend-take-home-service.fetch.com/locations`, {
-	// 			method: "POST",
-	// 			credentials: "include",
-	// 			headers: {
-	// 				"Content-Type": "application/json",
-	// 				"Accept": "application/json"
-	// 			},
-	// 			body: JSON.stringify([zip]),
-	// 		});
-	
-	// 		console.log("Response Status: ", response.status); 
-	
-	// 		if (!response.ok) {
-	// 			throw new Error("Failed to fetch location details");
-	// 		}
-	
-	// 		const data = await response.json();
-	// 		console.log("Location Data: ", data);
-	
-	// 		if (data.length > 0) {
-	// 			console.log("Setting ZipCodes: ", data[0].zip_code);
-	// 			// Set as an array
-	// 			setZipCodes([data[0].zip_code]);
-	// 		} else {
-	// 			setZipCodes([]);
-	// 		}
-	
-	// 	} catch (error) {
-	// 		console.error("Error in fetching location details: ", error);
-	// 	}
-	// }
-	
-	// useEffect(() => {
-	// 	console.log("Location state changed: ", location);
-		
-	// 	if (location) {
-	// 		console.log("Fetching location details for:", location);
-	// 		fetchLocationDetails(location);
-	// 	}
-	// }, [location]);
 
 	useEffect(() => {
 		async function fetchDogIds() {
@@ -80,12 +30,8 @@ function DogList({ selectedBreed, ageMin, ageMax, location, addToFavorites }) {
 				if (ageMax) {
 					queryParams.append("ageMax", ageMax);
 				}
-				// if (zipCodes.length > 0) {
-				// 	queryParams.append("zipCodes", zipCodes.join(","));
-				// }
 
 				if (location && /^[0-9]{5}$/.test(location)) { 
-          // Ensure location is a 5-digit ZIP code
           queryParams.append("zipCodes", location);
         }
 
@@ -110,7 +56,7 @@ function DogList({ selectedBreed, ageMin, ageMax, location, addToFavorites }) {
     }
 
     fetchDogIds();
-	}, [selectedBreed, ageMin, ageMax, zipCodes, sortOrder, currentPage])
+	}, [selectedBreed, ageMin, ageMax, location, sortOrder, currentPage])
 
 	useEffect(() => {
 		async function fetchDogDetails() {
@@ -138,9 +84,8 @@ function DogList({ selectedBreed, ageMin, ageMax, location, addToFavorites }) {
 	}, [dogIds])
 
 	return (
-		<div>
+		<div className="px-4 sm:px-6 lg:px-8 mb-12">
 			<div className="flex justify-between items-center">
-        {/* <h2 className="text-5xl font-semibold tracking-tight text-balance text-gray-200 sm:text-7sm">Available Dogs</h2> */}
         <Button variant="outlined" onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
           Sort by Breed ({sortOrder === "asc" ? "A-Z" : "Z-A"})
         </Button>
@@ -194,3 +139,55 @@ DogList.propTypes = {
 };
 
 export default DogList;
+
+// const [zipCodes, setZipCodes] = useState([]);
+
+// async function fetchLocationDetails(zip) {
+	// 	console.log("fetchLocationDetails called with ZIP:", zip);
+	
+	// 	if (!zip || typeof zip !== "string") {
+	// 		console.error("Invalid ZIP passed to fetchLocationDetails:", zip);
+	// 		return;
+	// 	}
+	
+	// 	try {
+	// 		const response = await fetch(`https://frontend-take-home-service.fetch.com/locations`, {
+	// 			method: "POST",
+	// 			credentials: "include",
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 				"Accept": "application/json"
+	// 			},
+	// 			body: JSON.stringify([zip]),
+	// 		});
+	
+	// 		console.log("Response Status: ", response.status); 
+	
+	// 		if (!response.ok) {
+	// 			throw new Error("Failed to fetch location details");
+	// 		}
+	
+	// 		const data = await response.json();
+	// 		console.log("Location Data: ", data);
+	
+	// 		if (data.length > 0) {
+	// 			console.log("Setting ZipCodes: ", data[0].zip_code);
+	// 			// Set as an array
+	// 			setZipCodes([data[0].zip_code]);
+	// 		} else {
+	// 			setZipCodes([]);
+	// 		}
+	
+	// 	} catch (error) {
+	// 		console.error("Error in fetching location details: ", error);
+	// 	}
+	// }
+	
+	// useEffect(() => {
+	// 	console.log("Location state changed: ", location);
+		
+	// 	if (location) {
+	// 		console.log("Fetching location details for:", location);
+	// 		fetchLocationDetails(location);
+	// 	}
+	// }, [location]);
